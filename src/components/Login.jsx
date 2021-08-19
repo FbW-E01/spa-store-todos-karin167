@@ -1,45 +1,48 @@
-import { useState } from 'react';
-import './Login.css';
+import { useState, useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import "./Login.css";
 
-function Login({ setUser }) {
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const { setUser } = useContext(UserContext);
+  //Object Destructuring
 
-    function doLogin(e) {
-        e.preventDefault();
+  //   const user = contextValue.user;
+  //   const setUser = contextValue.setUser;
 
-        if (email !== "joel@example.org") {
-            alert("Invalid email");
-            return;
-        }
+  function doLogin(e) {
+    e.preventDefault();
 
-        setUser({ id: 1, email, name: "Joel Peltonen" });
+    if (email !== "karin@gmail.com") {
+      alert("Invalid email");
+      return;
     }
 
-    return (
-        <form className="loginform" onSubmit={doLogin}>
-            <input
-                type="text"
-                placeholder="E-mail"
-                value={email}
-                name="email"
-                onChange={(event) => setEmail(event.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button
-                disabled={password.length === 0}
-                type="submit"
-            >
-                Login
-            </button>
-        </form>
-    );
+    setUser({ id: 1, email, name: "karin yahud" });
+  }
+
+  return (
+    <form className="loginform" onSubmit={doLogin}>
+      <input
+        type="text"
+        placeholder="E-mail"
+        value={email}
+        name="email"
+        onChange={(event) => setEmail(event.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button disabled={password.length === 0} type="submit">
+        Login
+      </button>
+    </form>
+  );
 }
 
 export default Login;
